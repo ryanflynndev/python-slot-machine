@@ -23,6 +23,7 @@ SYMBOL_VALUES = {
 
 def check_winnings(columns, lines, bet, values):
   winnings = 0
+  winning_lines = []
   for line in range(lines):
     symbol = columns[0][line]
     for col in columns:
@@ -31,8 +32,9 @@ def check_winnings(columns, lines, bet, values):
         break
     else:
       winnings += values[symbol] * bet
+      winning_lines.append(line + 1)
 
-  return winnings
+  return winnings, winning_lines
 
 
 def get_slot_machine_spin(rows, cols, symbols):
@@ -126,6 +128,12 @@ def main():
 
   slots = get_slot_machine_spin(ROWS, COLS, SYMBOLS)
   print_slot_machine(slots)
+  winnings, winning_lines = check_winnings(slots, lines, bet, SYMBOL_VALUES)
+  print(f"You won ${winnings}.")
+  if len(winning_lines) > 0:
+    print(f"You won on lines:", *winning_lines)
+  else:
+    print("Oh no! Better luck next time!")
 
 
 main()
