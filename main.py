@@ -76,6 +76,15 @@ def get_bet():
 
   return bet
 
+def print_slot_machine(columns):
+  # transposing matrix 
+  for row in range(len(columns[0])):
+    for i, column in enumerate(columns):
+      if i != len(columns) - 1:
+        print(column[row], "|")
+      else:
+        print(column[row])
+
 def main():
   balance = deposit()
   lines = get_num_of_lines()
